@@ -1,0 +1,196 @@
+.comic-neue-light {
+  font-family: "Comic Neue", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.comic-neue-regular {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.comic-neue-bold {
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.comic-neue-light-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.comic-neue-regular-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.comic-neue-bold-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+  font-style: italic;
+}
+:root {
+  --primaryColor: green;
+  --secondaryColor: lightgreen;
+  --tertiaryColor: yellow;
+}
+
+body {
+  margin: 0;
+  font-size: 1.2rem;
+}
+* {
+  box-sizing: border-box;
+}
+.wraper {
+  background: linear-gradient(var(--tertiaryColor), var(--primaryColor));
+  min-height: 100vh;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator {
+  background: gray;
+  width: 400px;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  gap: 1rem;
+  display: grid;
+  grid-template-areas:
+    "d d d d"
+    "ac c per divide"
+    "seven eight nine mul"
+    "four five six minus"
+    "one two three plus"
+    "zer dt eq eq";
+
+  transform: perspective(70rem) rotateX(30deg);
+  animation: moving 0.8s;
+}
+
+.calculator .cbtn {
+  background: var(--tertiaryColor);
+  height: 50px;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 10px 5px rgba(128, 128, 128, 0.678);
+}
+
+.calculator .cbtn:hover {
+  cursor: pointer;
+  background: var(--secondaryColor);
+  transition: all 0.3s;
+}
+.d {
+  background: var(--secondaryColor);
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-align: end;
+  font-weight: bolder;
+  box-shadow: 0 10px 5px rgba(128, 128, 128, 0.678);
+  grid-area: d;
+}
+.ac {
+  grid-area: ac;
+}
+
+.c {
+  grid-area: c;
+}
+
+.per {
+  grid-area: per;
+}
+.divide {
+  grid-area: divide;
+}
+.seven {
+  grid-area: seven;
+}
+
+.eight {
+  grid-area: eight;
+}
+
+.nine {
+  grid-area: nine;
+}
+
+.mul {
+  grid-area: mul;
+}
+.four {
+  grid-area: four;
+}
+.five {
+  grid-area: five;
+}
+.six {
+  grid-area: six;
+}
+.minus {
+  grid-area: minus;
+}
+.one {
+  grid-area: one;
+}
+.two {
+  grid-area: two;
+}
+.three {
+  grid-area: three;
+}
+.plus {
+  grid-area: plus;
+}
+.zero {
+  grid-area: zer;
+}
+.dot {
+  grid-area: dt;
+}
+.equal {
+  grid-area: eq;
+}
+
+.prank {
+  background: red;
+  color: white;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(10px);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translate(-10px);
+  }
+}
+
+@keyframes moving {
+  0% {
+    transform: perspective(10rem) rotateX(30deg);
+  }
+  100% {
+    transform: perspective(70rem) rotateX(30deg);
+  }
+}
