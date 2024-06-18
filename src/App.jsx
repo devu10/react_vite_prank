@@ -6,6 +6,7 @@ const operators = ["%", "/", "*", "-", "+"];
 const App = () => {
   const [strToDisplay, setStrToDisplay] = useState("");
   const [lastOperator, setLastOperator] = useState("");
+  const [isMouseDown, setIsMouseDown] = useState();
 
   const btns = [
     {
@@ -150,9 +151,18 @@ const App = () => {
     return n < 5 ? n : 0;
   };
 
+  const handleOnMouseDown = (value) => {
+    setIsMouseDown(value);
+  };
+
   const handleOnButtonClick = (value) => {
-    console.log(value);
+    setIsMouseDown();
     btnAction(value);
+  };
+
+  const btnStyle = {
+    transform: isMouseDown ? "scale(0.9)" : "scale(1)",
+    transition: "transform 0.2s",
   };
   return (
     <>
@@ -164,6 +174,9 @@ const App = () => {
               key={i}
               {...btn}
               handleOnButtonClick={handleOnButtonClick}
+              handleOnMouseDown={handleOnMouseDown}
+              btnStyle={btnStyle}
+              isMouseDown={isMouseDown}
             />
             // <Button key={i} cls={btn.cls} label={btn.label} />
           ))}
