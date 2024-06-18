@@ -1,7 +1,12 @@
+import { useState } from "react";
 import "./App.css";
 import { Button } from "./Button";
+const operators = ["%", "/", "*", "-", "+"];
 
 const App = () => {
+  const [strToDisplay, setStrToDisplay] = useState("");
+  const [lastOperator, setLastOperator] = useState("");
+
   const btns = [
     {
       cls: "ac",
@@ -81,14 +86,79 @@ const App = () => {
     },
   ];
 
+  const btnAction = (value) => {
+    //displayElm.classList.remove("prank");
+    if (value === "AC") {
+      setStrToDisplay("");
+      return;
+    }
+
+    if (value === "C") {
+      setStrToDisplay(strToDisplay.slice(0, -1));
+      return;
+    }
+
+    if (value === "=" || value === "Enter") {
+      setLastOperator("");
+      const lastCh = strToDisplay[strToDisplay.length - 1];
+      if (operators.includes(lastCh)) {
+        setStrToDisplay(strToDisplay.slice(0, -1));
+      }
+      return calExp();
+    }
+
+    if (operators.includes(value)) {
+      setLastOperator(value);
+      const lastCh = strToDisplay[strToDisplay.length - 1];
+      if (operators.includes(lastCh)) {
+        setStrToDisplay(strToDisplay.slice(0, -1) + value);
+        return;
+      }
+    }
+
+    if (value === ".") {
+      const indexOfLastOperator = strToDisplay.lastIndexOf(lastOperator);
+
+      const lastNumberSet = strToDisplay.slice(indexOfLastOperator);
+
+      if (lastNumberSet.includes(".")) {
+        return;
+      }
+
+      if (!lastOperator && strToDisplay.includes(".")) {
+        return;
+      }
+    }
+
+    setStrToDisplay(strToDisplay + value);
+  };
+
+  const calExp = () => {
+    const prankVal = rValue();
+
+    if (prankVal) {
+      // displayElm.classList.add("prank");
+      //audio.play();
+    }
+
+    const calc = eval(strToDisplay) + prankVal;
+    setStrToDisplay(calc.toString());
+  };
+
+  const rValue = () => {
+    const n = Math.round(Math.random() * 10);
+    return n < 5 ? n : 0;
+  };
+
   const handleOnButtonClick = (value) => {
     console.log(value);
+    btnAction(value);
   };
   return (
     <>
       <div className="wraper flex-center">
         <div className="calculator">
-          <div className="d comic-neue-regular">0.0</div>
+          <div className="d comic-neue-regular">{strToDisplay || "0.0"}</div>
           {btns.map((btn, i) => (
             <Button
               key={i}
