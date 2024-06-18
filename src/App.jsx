@@ -80,13 +80,21 @@ const App = () => {
       label: "=",
     },
   ];
+
+  const handleOnButtonClick = (value) => {
+    console.log(value);
+  };
   return (
     <>
       <div className="wraper flex-center">
         <div className="calculator">
           <div className="d comic-neue-regular">0.0</div>
           {btns.map((btn, i) => (
-            <Button key={i} {...btn} />
+            <Button
+              key={i}
+              {...btn}
+              handleOnButtonClick={handleOnButtonClick}
+            />
             // <Button key={i} cls={btn.cls} label={btn.label} />
           ))}
         </div>
