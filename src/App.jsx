@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 import { Button } from "./Button";
+import ad from "./assets/ad.mp3";
 const operators = ["%", "/", "*", "-", "+"];
+const audio = new Audio(ad);
 
 const App = () => {
   const [strToDisplay, setStrToDisplay] = useState("");
   const [lastOperator, setLastOperator] = useState("");
   const [isMouseDown, setIsMouseDown] = useState();
+  const [isPrank, setIsPrank] = useState(false);
 
   const btns = [
     {
@@ -138,8 +141,7 @@ const App = () => {
     const prankVal = rValue();
 
     if (prankVal) {
-      // displayElm.classList.add("prank");
-      //audio.play();
+      audio.play();
     }
 
     const calc = eval(strToDisplay) + prankVal;
@@ -168,7 +170,13 @@ const App = () => {
     <>
       <div className="wraper flex-center">
         <div className="calculator">
-          <div className="d comic-neue-regular">{strToDisplay || "0.0"}</div>
+          <div
+            className={
+              isPrank ? "d comic-neue-regular prank" : "d comic-neue-regular"
+            }
+          >
+            {strToDisplay || "0.0"}
+          </div>
           {btns.map((btn, i) => (
             <Button
               key={i}
