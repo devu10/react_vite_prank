@@ -91,7 +91,7 @@ const App = () => {
   ];
 
   const btnAction = (value) => {
-    //displayElm.classList.remove("prank");
+    isPrank && setIsPrank(false);
     if (value === "AC") {
       setStrToDisplay("");
       return;
@@ -141,6 +141,7 @@ const App = () => {
     const prankVal = rValue();
 
     if (prankVal) {
+      setIsPrank(true);
       audio.play();
     }
 
