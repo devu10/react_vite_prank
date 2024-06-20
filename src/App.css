@@ -36,7 +36,7 @@
 :root {
   --primaryColor: green;
   --secondaryColor: lightgreen;
-  --tertiaryColor: yellow;
+  --tertiaryColor: rgb(238, 238, 39);
 }
 
 body {

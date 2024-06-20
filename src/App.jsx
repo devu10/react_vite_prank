@@ -176,7 +176,7 @@ const App = () => {
               isPrank ? "d comic-neue-regular prank" : "d comic-neue-regular"
             }
           >
-            {strToDisplay || "0.0"}
+            {strToDisplay || "0.00"}
           </div>
           {btns.map((btn, i) => (
             <Button
