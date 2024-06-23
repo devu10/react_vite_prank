@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Button } from "./Button";
 import ad from "./assets/ad.mp3";
@@ -10,6 +10,8 @@ const App = () => {
   const [lastOperator, setLastOperator] = useState("");
   const [isMouseDown, setIsMouseDown] = useState();
   const [isPrank, setIsPrank] = useState(false);
+
+  const isEventAttached = useRef(false);
 
   const btns = [
     {
@@ -89,6 +91,20 @@ const App = () => {
       label: "=",
     },
   ];
+
+  useEffect(() => {
+    !isEventAttached.current &&
+      window.addEventListener("keypress", (e) => {
+        const value = e.key;
+
+        if (e.code.includes("Key")) {
+          return;
+        }
+        btnAction(value);
+      });
+
+    isEventAttached.current = true;
+  }, []);
 
   const btnAction = (value) => {
     isPrank && setIsPrank(false);
