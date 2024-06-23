@@ -106,64 +106,119 @@ const App = () => {
     },
   ];
 
+  // const btnAction = (value) => {
+  //   console.log(value);
+  //   isPrank && setIsPrank(false);
+  //   if (value === "AC") {
+  //     setStrToDisplay("");
+  //     return;
+  //   }
+
+  //   if (value === "C") {
+  //     setStrToDisplay(strToDisplay.slice(0, -1));
+  //     return;
+  //   }
+
+  //   if (value === "=" || value === "Enter") {
+  //     setLastOperator("");
+  //     const lastCh = strToDisplay[strToDisplay.length - 1];
+  //     if (operators.includes(lastCh)) {
+  //       setStrToDisplay(strToDisplay.slice(0, -1));
+  //     }
+  //     return calExp();
+  //   }
+
+  //   if (operators.includes(value)) {
+  //     setLastOperator(value);
+  //     const lastCh = strToDisplay[strToDisplay.length - 1];
+  //     if (operators.includes(lastCh)) {
+  //       setStrToDisplay(strToDisplay.slice(0, -1) + value);
+  //       return;
+  //     }
+  //   }
+
+  //   if (value === ".") {
+  //     const indexOfLastOperator = strToDisplay.lastIndexOf(lastOperator);
+
+  //     const lastNumberSet = strToDisplay.slice(indexOfLastOperator);
+
+  //     if (lastNumberSet.includes(".")) {
+  //       return;
+  //     }
+
+  //     if (!lastOperator && strToDisplay.includes(".")) {
+  //       return;
+  //     }
+  //   }
+
+  //   setStrToDisplay(strToDisplay + value);
+  // };
+
+  // const calExp = () => {
+  //   const prankVal = rValue();
+
+  //   if (prankVal) {
+  //     setIsPrank(true);
+  //     audio.play();
+  //   }
+
+  //   const calc = eval(strToDisplay) + prankVal;
+  //   setStrToDisplay(calc.toString());
+  // };
+
+  // new code
+
   const btnAction = (value) => {
-    console.log(value);
-    isPrank && setIsPrank(false);
-    if (value === "AC") {
-      setStrToDisplay("");
-      return;
-    }
-
-    if (value === "C") {
-      setStrToDisplay(strToDisplay.slice(0, -1));
-      return;
-    }
-
-    if (value === "=" || value === "Enter") {
-      setLastOperator("");
-      const lastCh = strToDisplay[strToDisplay.length - 1];
-      if (operators.includes(lastCh)) {
-        setStrToDisplay(strToDisplay.slice(0, -1));
-      }
-      return calExp();
-    }
-
-    if (operators.includes(value)) {
-      setLastOperator(value);
-      const lastCh = strToDisplay[strToDisplay.length - 1];
-      if (operators.includes(lastCh)) {
-        setStrToDisplay(strToDisplay.slice(0, -1) + value);
-        return;
-      }
-    }
-
-    if (value === ".") {
-      const indexOfLastOperator = strToDisplay.lastIndexOf(lastOperator);
-
-      const lastNumberSet = strToDisplay.slice(indexOfLastOperator);
-
-      if (lastNumberSet.includes(".")) {
-        return;
+    setIsPrank(false);
+    setStrToDisplay((prevStr) => {
+      if (value === "AC") {
+        return "";
       }
 
-      if (!lastOperator && strToDisplay.includes(".")) {
-        return;
+      if (value === "C") {
+        return prevStr.slice(0, -1);
       }
-    }
 
-    setStrToDisplay(strToDisplay + value);
+      if (value === "=" || value === "Enter") {
+        setLastOperator("");
+        const lastCh = prevStr[prevStr.length - 1];
+        if (operators.includes(lastCh)) {
+          return prevStr.slice(0, -1);
+        }
+        return calExp(prevStr);
+      }
+
+      if (operators.includes(value)) {
+        setLastOperator(value);
+        const lastCh = prevStr[prevStr.length - 1];
+        if (operators.includes(lastCh)) {
+          return prevStr.slice(0, -1) + value;
+        }
+      }
+
+      if (value === ".") {
+        const indexOfLastOperator = prevStr.lastIndexOf(lastOperator);
+        const lastNumberSet = prevStr.slice(indexOfLastOperator);
+        if (lastNumberSet.includes(".")) {
+          return prevStr;
+        }
+        if (!lastOperator && prevStr.includes(".")) {
+          return prevStr;
+        }
+      }
+
+      return prevStr + value;
+    });
   };
 
-  const calExp = () => {
+  const calExp = (exp) => {
     const prankVal = rValue();
-
     if (prankVal) {
       setIsPrank(true);
       audio.play();
     }
-
-    const calc = eval(strToDisplay) + prankVal;
-    setStrToDisplay(calc.toString());
+    const calc = eval(exp) + prankVal;
+    return calc.toString();
   };
 
   const rValue = () => {
