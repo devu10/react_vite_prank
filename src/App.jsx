@@ -13,6 +13,20 @@ const App = () => {
 
   const isEventAttached = useRef(false);
 
+  useEffect(() => {
+    !isEventAttached.current &&
+      window.addEventListener("keypress", (e) => {
+        const keyPress = e.key;
+        console.log(e);
+        if (e.code.includes("Key")) {
+          return;
+        }
+        btnAction(keyPress);
+      });
+
+    isEventAttached.current = true;
+  }, []);
+
   const btns = [
     {
       cls: "ac",
@@ -92,21 +106,8 @@ const App = () => {
     },
   ];
 
-  useEffect(() => {
-    !isEventAttached.current &&
-      window.addEventListener("keypress", (e) => {
-        const value = e.key;
-
-        if (e.code.includes("Key")) {
-          return;
-        }
-        btnAction(value);
-      });
-
-    isEventAttached.current = true;
-  }, []);
-
   const btnAction = (value) => {
+    console.log(value);
     isPrank && setIsPrank(false);
     if (value === "AC") {
       setStrToDisplay("");
