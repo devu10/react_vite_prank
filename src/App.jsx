@@ -17,7 +17,7 @@ const App = () => {
     !isEventAttached.current &&
       window.addEventListener("keypress", (e) => {
         const keyPress = e.key;
-        console.log(e);
+
         if (e.code.includes("Key")) {
           return;
         }
