@@ -34,7 +34,7 @@
   font-style: italic;
 }
 :root {
-  --primaryColor: green;
+  --primaryColor: rgba(7, 160, 7, 0.863);
   --secondaryColor: lightgreen;
   --tertiaryColor: rgb(238, 238, 39);
 }
@@ -166,7 +166,7 @@ body {
 }
 
 .prank {
-  background: red;
+  background: rgb(219, 17, 17);
   color: white;
   animation: shake 0.5s;
 }
